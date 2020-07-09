@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "math.h"
 
 typedef struct list
 {
@@ -21,7 +21,6 @@ int countSize (LIST *k, int cnt)
     else
     {
         cnt = cnt+1;
-        printf("count here \n");
         return countSize(k->next, cnt);
     }
 }
@@ -31,6 +30,7 @@ int listToNum (LIST *k)
 {
     int cnt = 0;
     int number = 0;
+    int fa = 1;
     cnt = countSize(k, cnt);
     int num[cnt];
     printf("list size is: %d\n", cnt);
@@ -46,8 +46,9 @@ int listToNum (LIST *k)
             temp = t;
             t = temp->next;
         }
-        number = num[i]; 
-        number += number * (10^i);
+        fa = fa * 10; 
+        number = number + num[i] * fa /10; 
+        
         printf("number is %d, %d\n", i, number);
     }
     return number;
