@@ -8,7 +8,7 @@ int lengthCount ( char *s ){
     temp = *s;
     while('\0' != temp){
         cnt++;
-        temp = *(s+1);
+        temp = *(s + cnt);
     }
     return cnt;
 }
@@ -19,6 +19,7 @@ static int lengthOfLongestSubstring(char * s){
     int result = 0;
     int tlen = 0;
     strLen = lengthCount(s);
+    // printf ("a string length is: %d\n", strLen);
     char p;
     char *temp,  *head;
     head = s;
@@ -28,29 +29,44 @@ static int lengthOfLongestSubstring(char * s){
     do{
         tlen++;
         p = *(head + tlen);
-        for (int i=0; i <= tlen; i++){
-            if (p != *(head +i)){
-                if (result < tlen){
+        printf ("P char %c and tlen %d \n", p, tlen);
+        for(int i = 0; i < tlen; i++){
+            if (p != *(head + i)){
+                printf ("----compare point %c, compare times: %d \n", *(head+i), (i+1));
+                if (i == (tlen-1) && (result < tlen)){
                     result = tlen;
-                    printf (" the temp result: %d\n", result);
+                    printf ("++++the temp result: %d\n", result);
                 }
             }
             else{
-                temp = head + i;
+                temp = head + i + 1;
                 head = temp;
                 p = *head;
                 tlen = 0;
-                printf("break the loop \n");
-                break;
+                printf("######the new head char: %c ######\n", p);
+                break;                
             }
-        } 
-    }while('\0' != p)
+        }
+    }while('\0' != p);
     return result;
 }
 
 int main(){
-    char a[] = {'a', 'b', 'c', 'd', 'e', 'a', 'f', 'g', 'h', '\0'};
+    char a[10] = {'a', 'b', 'c', 'd', 'e', 'a', 'c', 'g', 'h', '\0'};
+    // printf ("a string is: %s\n", a);
     int len;
     len =  lengthOfLongestSubstring(a);
     printf("the substr length is: %d \n", len);
 } 
+
+
+
+
+
+
+
+
+
+
+
+
