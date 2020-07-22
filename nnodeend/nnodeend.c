@@ -2,10 +2,10 @@
 #include <stdlib.h>
 
 
-typedef struct node{
+typedef struct Node{
     int val;
-    struct NODE * next;
-} NODE;
+    struct Node * next;
+} Node;
 
 
 static NODE * removeNendNode(NODE * head, int n){
